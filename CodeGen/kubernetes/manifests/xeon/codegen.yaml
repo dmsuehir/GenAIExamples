@@ -1,3 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hf-token-secret
+data:
+  .token: encoded-huggingface-token
 ---
 # Source: codegen/charts/llm-uservice/templates/configmap.yaml
 # Copyright (C) 2024 Intel Corporation
@@ -15,11 +21,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 data:
   TGI_LLM_ENDPOINT: "http://codegen-tgi"
-  HUGGINGFACEHUB_API_TOKEN: "insert-your-huggingface-token-here"
   HF_HOME: "/tmp/.cache/huggingface"
-  http_proxy:
-  https_proxy:
-  no_proxy:
+  http_proxy: ""
+  https_proxy: ""
+  no_proxy: ""
   LANGCHAIN_TRACING_V2: "false"
   LANGCHAIN_API_KEY: insert-your-langchain-key-here
   LANGCHAIN_PROJECT: "opea-llm-uservice"
@@ -41,13 +46,11 @@ metadata:
 data:
   MODEL_ID: "meta-llama/CodeLlama-7b-hf"
   PORT: "2080"
-  HUGGING_FACE_HUB_TOKEN: "insert-your-huggingface-token-here"
-  HF_TOKEN: "insert-your-huggingface-token-here"
   MAX_INPUT_TOKENS: "1024"
   MAX_TOTAL_TOKENS: "4096"
-  http_proxy:
-  https_proxy:
-  no_proxy:
+  http_proxy: ""
+  https_proxy: ""
+  no_proxy: ""
   HABANA_LOGS: "/tmp/habana_logs"
   NUMBA_CACHE_DIR: "/tmp"
   TRANSFORMERS_CACHE: "/tmp/transformers_cache"
