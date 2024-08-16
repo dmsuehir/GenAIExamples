@@ -22,6 +22,7 @@ metadata:
 data:
   TGI_LLM_ENDPOINT: "http://codegen-tgi"
   HF_HOME: "/tmp/.cache/huggingface"
+  HF_TOKEN_PATH="/etc/token-volume/.token"
   http_proxy: ""
   https_proxy: ""
   no_proxy: ""
@@ -183,6 +184,9 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp
+            - mountPath: /etc/token-volume
+              name: hf-token-volume
+              readOnly: true
           startupProbe:
             exec:
               command:
@@ -196,6 +200,9 @@ spec:
       volumes:
         - name: tmp
           emptyDir: {}
+        - name: hf-token-volume
+          secret:
+            secretName: hf-token-secret
 ---
 # Source: codegen/charts/tgi/templates/deployment.yaml
 # Copyright (C) 2024 Intel Corporation
