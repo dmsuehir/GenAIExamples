@@ -47,6 +47,7 @@ metadata:
 data:
   MODEL_ID: "meta-llama/CodeLlama-7b-hf"
   PORT: "2080"
+  CUDA_GRAPHS: "0"
   MAX_INPUT_TOKENS: "1024"
   MAX_TOTAL_TOKENS: "4096"
   http_proxy: ""
@@ -239,7 +240,7 @@ spec:
                 name: codegen-tgi-config
           securityContext:
             {}
-          image: "ghcr.io/huggingface/text-generation-inference:1.4"
+          image: "ghcr.io/huggingface/text-generation-inference:latest-intel-cpu"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /data
