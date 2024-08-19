@@ -22,7 +22,7 @@ metadata:
 data:
   TGI_LLM_ENDPOINT: "http://codegen-tgi"
   HF_HOME: "/tmp/.cache/huggingface"
-  HF_TOKEN_PATH="/etc/token-volume/.token"
+  HF_TOKEN_PATH: "/etc/token-volume/.token"
   http_proxy: ""
   https_proxy: ""
   no_proxy: ""
