@@ -20,7 +20,8 @@ RUN git clone https://github.com/opea-project/GenAIComps.git
 
 WORKDIR /home/user/GenAIComps
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r /home/user/GenAIComps/requirements.txt
+    pip install --no-cache-dir -r /home/user/GenAIComps/requirements.txt && \
+    pip install uvicorn
 
 COPY ./videoqna.py /home/user/videoqna.py
 

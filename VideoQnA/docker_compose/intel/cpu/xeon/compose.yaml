@@ -25,8 +25,8 @@ services:
       INDEX_NAME: ${INDEX_NAME}
     entrypoint: sh -c 'sleep 15 && python ingest_videos.py'
     volumes:
-      - /home/$USER/.cache/clip:/home/user/.cache/clip
-      - /home/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
+      - /localdisk/$USER/.cache/clip:/home/user/.cache/clip
+      - /localdisk/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
   embedding:
     image: ${REGISTRY:-opea}/embedding-multimodal-clip:${TAG:-latest}
     container_name: embedding-multimodal-server
@@ -38,7 +38,7 @@ services:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
     volumes:
-      - /home/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
+      - /localdisk/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
     restart: unless-stopped
   retriever:
     image: ${REGISTRY:-opea}/retriever-vdms:${TAG:-latest}
@@ -59,7 +59,7 @@ services:
     entrypoint: sh -c 'sleep 30 && python retriever_vdms.py'
     restart: unless-stopped
     volumes:
-      - /home/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
+      - /localdisk/$USER/.cache/huggingface/hub:/home/user/.cache/huggingface/hub
   reranking:
     image: ${REGISTRY:-opea}/reranking-videoqna:${TAG:-latest}
     container_name: reranking-videoqna-server
@@ -86,7 +86,7 @@ services:
       no_proxy: ${no_proxy}
       llm_download: ${LLM_DOWNLOAD}
     volumes:
-      - "/home/$USER/.cache:/home/user/.cache"
+      - "/localdisk/$USER/.cache:/home/user/.cache"
       - video-llama-model:/home/user/model
     restart: unless-stopped
   lvm:
